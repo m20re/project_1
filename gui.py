@@ -86,7 +86,15 @@ class GUI:
         self.entry_answer.pack(padx=10, side=LEFT)
         self.frame_equation.pack(pady=10)
 
+        with open('output.txt', 'a') as f:
+            if operation == '+':
+                f.write(f'{num1} + {num2} = {self.result}\n')
+            elif operation == '-':
+                f.write(f'{num1} - {num2} = {self.result}\n')
+            else:
+                f.write(f'{num1} * {num2} = {self.result}\n')
         return
+
     
     def check_answer(self):
         try:
