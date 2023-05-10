@@ -8,12 +8,19 @@ class GUI:
 
         
         self.window = window
-        
+
         #title frame
         self.frame_title = Frame(self.window)
         self.label_title = Label(self.frame_title, font=("Arial",25), text="Math Checker")
         self.label_title.pack()
         self.frame_title.pack(pady=10)
+        
+         # label num_2 & num_2 frame
+        self.frame_num_display = Frame(self.window)
+        self.label_num_1 = Label(self.frame_num_display, text=' First Number', font=("Arial", 8))
+        self.label_num_2 = Label(self.frame_num_display, text=' Second Number', font=("Arial", 8))
+
+        self.frame_num_display.pack(pady=5, anchor='w')
 
 
 
