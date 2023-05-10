@@ -5,10 +5,9 @@ from random import randrange, choice
 class GUI:
     def __init__(self, window):
 
-        
         self.window = window
 
-        #title frame
+        # title frame
         self.frame_title = Frame(self.window)
         self.label_title = Label(self.frame_title, font=("Arial",25), text="Math Checker")
         self.label_title.pack()
@@ -32,22 +31,17 @@ class GUI:
         self.label_num2 = Label(self.frame_equation, font=("Arial", 25), textvariable=self.number2)
         self.entry_answer = Entry(self.frame_equation, font=("Arial", 25), width=5)
 
-        self.label_num1.pack_forget()
-        self.label_operation.pack_forget()
-        self.label_num2.pack_forget()
-        self.entry_answer.pack_forget()
         self.entry_answer = Entry(self.frame_equation, font=("Arial", 25), width=5)
         
         self.frame_equation.pack(pady=5)
 
-        # results label
+        # results frame
         self.frame_results = Frame(self.window)
         self.intended_result = StringVar()
         self.intended_results_label = Label(self.frame_results, textvariable=self.intended_result, font=("Arial", 12))
 
         self.intended_results_label.pack_forget()
         self.frame_results.pack(pady=10, anchor='s')
-
 
         # new equation frame
         self.frame_generate_button = Frame(self.window)
@@ -63,7 +57,14 @@ class GUI:
 
         
 
-    def generate_equation_and_result(self) -> list:
+    def generate_equation_and_result(self) -> None:
+        """
+        Generates a two random numbers, and operation for those numbers.
+        The operation will be displayed on the GUI itself, and written into
+         output.txt
+        :return: none """
+        self.intended_results_label.pack_forget()
+        self.entry_answer.delete(0,END)
 
         num1 = randrange(0,20)
         num2 = randrange(1,9)
@@ -96,7 +97,14 @@ class GUI:
         return
 
     
-    def check_answer(self):
+    def check_answer(self) -> None:
+        """
+        Checks whether a person has correctly answered the equation.
+        The GUI will respond depending on whether it's right, wrong
+         or if the input is invalid.
+        :return: none
+        """
+
         try:
             if float(self.entry_answer.get()) == self.result:
                 self.intended_result.set('Correct! Generate a new equation!')
