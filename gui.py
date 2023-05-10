@@ -47,7 +47,31 @@ class GUI:
         self.generate_button.pack(padx=5)
         self.frame_generate_button.pack(anchor='s',pady=10) 
 
+        
+
     def generate_equation_and_result(self) -> list:
+        num1 = randrange(0,100)
+        num2 = randrange(1,100)
+        operation = choice(['+', '-', '*', '/'])
+
+        self.number1.set(str(num1))
+        self.number2.set(str(num2) + '    =')
+        self.operation.set('*')
+
+        if operation == '+':
+            self.result = num1 + num2
+        elif operation == '-':
+            self.result = num1 - num2
+        elif operation == '*':
+            self.result = num1 * num2
+        else:
+            self.result = num1 / num2
+        
+        self.label_num1.pack(padx=10, side=LEFT)
+        self.label_operation.pack(padx=10, side=LEFT)
+        self.label_num2.pack(padx=10, side=LEFT)
+        self.entry_answer.pack(padx=10, side=LEFT)
+        self.frame_equation.pack(pady=10)
         return
 
 
