@@ -40,11 +40,20 @@ class GUI:
         
         self.frame_equation.pack(pady=5)
 
+        # results label
+        self.frame_results = Frame(self.window)
+        self.intended_result = StringVar()
+        self.intended_results_label = Label(self.frame_results, textvariable=self.intended_result, font=("Arial", 12))
+
+        self.intended_results_label.pack_forget()
+        self.frame_results.pack(pady=10, anchor='s')
+
+
         # new equation frame
         self.frame_generate_button = Frame(self.window)
         self.generate_button = Button(self.frame_generate_button, text='Generate Equation', command=self.generate_equation_and_result)
         self.generate_button.pack(padx=10)
-        self.frame_generate_button.pack(anchor='sw',side=LEFT, pady=10) 
+        self.frame_generate_button.pack(anchor='sw',side=LEFT, pady=10)
 
         # check answer frame
         self.frame_check = Frame(self.window)
@@ -58,7 +67,7 @@ class GUI:
 
         num1 = randrange(0,20)
         num2 = randrange(1,9)
-        operation = choice(['+', '-', '*', '/'])
+        operation = choice(['+', '-', '*'])
 
         self.number1.set(str(num1))
         self.number2.set(str(num2) + '    =')
@@ -68,25 +77,26 @@ class GUI:
             self.result = num1 + num2
         elif operation == '-':
             self.result = num1 - num2
-        elif operation == '*':
-            self.result = num1 * num2
         else:
-            self.result = num1 / num2
+            self.result = num1 * num2
         
         self.label_num1.pack(padx=10, side=LEFT)
         self.label_operation.pack(padx=10, side=LEFT)
         self.label_num2.pack(padx=10, side=LEFT)
         self.entry_answer.pack(padx=10, side=LEFT)
         self.frame_equation.pack(pady=10)
+
         return
     
     def check_answer(self):
         try:
             if float(self.entry_answer.get()) == self.result:
-                print(f'Yes, {self.entry_answer.get()} is equal to {self.result}')
-        except TypeError:
-            print('TypeError was raised')
+                self.intended_result.set('Correct! Generate a new equation!')
+                self.intended_results_label.pack(padx=5)
+            else:
+                self.intended_result.set('Incorrect! Try again or make a new equation!')
+                self.intended_results_label.pack(padx=5)
         except ValueError:
-            print('Value error was raised')
+            self.intended_result.set("Input only numbers!")
+            self.intended_results_label.pack(padx=5)
         return
-
