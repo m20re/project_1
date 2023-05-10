@@ -1,6 +1,5 @@
 from tkinter import *
 from random import randrange, choice
-import csv
 
 
 class GUI:
@@ -57,8 +56,8 @@ class GUI:
 
     def generate_equation_and_result(self) -> list:
 
-        num1 = randrange(0,100)
-        num2 = randrange(1,100)
+        num1 = randrange(0,20)
+        num2 = randrange(1,9)
         operation = choice(['+', '-', '*', '/'])
 
         self.number1.set(str(num1))
@@ -82,10 +81,12 @@ class GUI:
         return
     
     def check_answer(self):
+        try:
+            if float(self.entry_answer.get()) == self.result:
+                print(f'Yes, {self.entry_answer.get()} is equal to {self.result}')
+        except TypeError:
+            print('TypeError was raised')
+        except ValueError:
+            print('Value error was raised')
         return
-
-
-
-
-
 
