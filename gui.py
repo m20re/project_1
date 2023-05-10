@@ -41,22 +41,29 @@ class GUI:
         
         self.frame_equation.pack(pady=5)
 
-        # new equation button
+        # new equation frame
         self.frame_generate_button = Frame(self.window)
         self.generate_button = Button(self.frame_generate_button, text='Generate Equation', command=self.generate_equation_and_result)
-        self.generate_button.pack(padx=5)
-        self.frame_generate_button.pack(anchor='s',pady=10) 
+        self.generate_button.pack(padx=10)
+        self.frame_generate_button.pack(anchor='sw',side=LEFT, pady=10) 
+
+        # check answer frame
+        self.frame_check = Frame(self.window)
+        self.button_check = Button(self.frame_check, text='Check Answer', command=self.check_answer)
+        self.button_check.pack(padx=10)
+        self.frame_check.pack(anchor="se", side=RIGHT, pady=10)
 
         
 
     def generate_equation_and_result(self) -> list:
+
         num1 = randrange(0,100)
         num2 = randrange(1,100)
         operation = choice(['+', '-', '*', '/'])
 
         self.number1.set(str(num1))
         self.number2.set(str(num2) + '    =')
-        self.operation.set('*')
+        self.operation.set(operation)
 
         if operation == '+':
             self.result = num1 + num2
@@ -72,6 +79,9 @@ class GUI:
         self.label_num2.pack(padx=10, side=LEFT)
         self.entry_answer.pack(padx=10, side=LEFT)
         self.frame_equation.pack(pady=10)
+        return
+    
+    def check_answer(self):
         return
 
 
