@@ -3,13 +3,19 @@ from random import randrange, choice
 
 
 class GUI:
-    def __init__(self, window):
+    def __init__(self, window) -> None:
+        """
+        Defines six seperate frames: title, num_1 & 2,
+         equation, results, new equation, and check answer.
+        :return: none
+        """
 
         self.window = window
 
         # title frame
         self.frame_title = Frame(self.window)
         self.label_title = Label(self.frame_title, font=("Arial",25), text="Math Checker")
+
         self.label_title.pack()
         self.frame_title.pack(pady=10)
 
@@ -62,7 +68,8 @@ class GUI:
         Generates a two random numbers, and operation for those numbers.
         The operation will be displayed on the GUI itself, and written into
          output.txt
-        :return: none """
+        :return: none 
+        """
         self.intended_results_label.pack_forget()
         self.entry_answer.delete(0,END)
 
@@ -106,13 +113,13 @@ class GUI:
         """
 
         try:
-            if float(self.entry_answer.get()) == self.result:
+            if float(self.entry_answer.get().strip()) == self.result:
                 self.intended_result.set('Correct! Generate a new equation!')
                 self.intended_results_label.pack(padx=5)
             else:
                 self.intended_result.set('Incorrect! Try again or make a new equation!')
                 self.intended_results_label.pack(padx=5)
         except ValueError:
-            self.intended_result.set("Input only numbers!")
+            self.intended_result.set("Input only whole numbers!")
             self.intended_results_label.pack(padx=5)
         return
